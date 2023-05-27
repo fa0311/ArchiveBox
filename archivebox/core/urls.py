@@ -8,6 +8,7 @@ from django.views.generic.base import RedirectView
 
 from core.views import HomepageView, SnapshotView, PublicIndexView, AddView, HealthCheckView
 
+from core.api import RustAPI
 
 # print('DEBUG', settings.DEBUG)
 
@@ -37,6 +38,9 @@ urlpatterns = [
     path('index.html', RedirectView.as_view(url='/')),
     path('index.json', static.serve, {'document_root': settings.OUTPUT_DIR, 'path': 'index.json'}),
     path('', HomepageView.as_view(), name='Home'),
+
+
+    path("api/", RustAPI.api.urls),
 ]
 urlpatterns += staticfiles_urlpatterns()
 
